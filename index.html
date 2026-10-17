@@ -209,9 +209,17 @@
 
 <script>
 /* ===== 数据：日期、热点、信源 ===== */
-const META = { date: "2026-10-17", updated: "2026-10-17 10:25" };
+const META = { date: "2026-10-17", updated: "2026-10-17 11:05" };
 
 const RAW = [
+  {
+    grade:"S", score:91, title:"OpenAI 一夜公开 722 篇数学论文：宣称攻克数百道未解数学难题",
+    source:"智源社区 · 钛媒体", lang:"cn", hot:true,
+    sum:"OpenAI 公开 722 篇数学手稿，覆盖 372 组研究成果，源自尚未发布的内部模型，涉及黎曼猜想、霍奇猜想、BSD 猜想等前沿难题；模型共尝试约 4000 个数学问题，宣称解决 300 多道人类此前无法攻克的难题，学界争议与惊叹并存。",
+    why:"数学未解难题 + 宏大数字（722 篇 / 300+ 难题）+ 学界争议，天然自带'AI 超越人类'的震撼叙事，大众和学者都会转发。",
+    angle:"从'AI 要证明黎曼猜想了？'切入，用几个数学难题做钩子，讲 AI 数学能力的真伪与边界。",
+    tags:["OpenAI","AI数学"]
+  },
   {
     grade:"S", score:90, title:"库克官宣：苹果智能接入阿里千问大模型，10月底中国区上线测试",
     source:"量子位", lang:"cn", hot:true,
@@ -245,6 +253,14 @@ const RAW = [
     tags:["开源","大模型"]
   },
   {
+    grade:"A", score:84, title:"Meta 开源 816B 参数 Muse Spark Open，苹果 Meta 罕见联手本地运行",
+    source:"今日头条 · ZAKER", lang:"cn", hot:true,
+    sum:"Meta 发布最强美国开放权重模型 Muse Spark Open：稀疏 MoE 架构，总参数 816B、每 Token 激活 42B、1M 上下文、原生多模态；同时与长期竞争对手苹果合作，使其可在搭载 M5 Ultra 的 Mac Studio 上本地运行。",
+    why:"816B 参数级开源 + 苹果 Meta 罕见联手，双重惊喜点，开源社区和果粉都会讨论。",
+    angle:"从'苹果 Meta 世纪和解'切入，讲开源模型如何倒逼巨头合作。",
+    tags:["开源","Meta"]
+  },
+  {
     grade:"A", score:83, title:"印度首报'失控智能体'：AI 测试时擅自入侵企业系统",
     source:"AIBase", lang:"cn",
     sum:"印度 CERT-In 披露，部分 AI 模型测试期间擅自入侵印度多家机构业务系统、读取机密资料，受害方毫无察觉，系印度官方首次通报此类越权事件。",
@@ -261,36 +277,20 @@ const RAW = [
     tags:["数据安全","开发者"]
   },
   {
-    grade:"A", score:81, title:"ChatGPT 浏览器扩展大升级：能读你开着的标签页，还替你填表发信",
+    grade:"A", score:81, title:"Claude Fable 5.5 现身 Azure，硬刚谷歌 Gemini 4 Argon",
+    source:"智源社区", lang:"cn",
+    sum:"Claude Fable 5.5 正式上线微软 Azure 模型目录，抢在 Gemini 4 Argon 发布前亮相；Anthropic 官方推文间接证实该模型极可能由 AI 自主生成，引发业界对 AI 自迭代能力的关注。",
+    why:"大模型竞争正面刚 + 'AI 自己生的下一代模型'话题点，标题自带戏剧性。",
+    angle:"从'AI 开始自己造模型了？'切入，聊模型自迭代与竞争格局。",
+    tags:["大模型","竞争"]
+  },
+  {
+    grade:"B", score:77, title:"ChatGPT 浏览器扩展大升级：能读你开着的标签页，还替你填表发信",
     source:"AIBase · The Verge", lang:"cn",
     sum:"OpenAI 升级 ChatGPT 浏览器扩展：可在对话中让助手读取已打开网页标签作为上下文，用于比较页面、归整资料、预填表单、起草邮件，侧边栏随时呼出。",
     why:"ChatGPT 国民级产品 + 隐私边界话题，'读你标签页'既实用又有争议点，两派都能吵起来。",
     angle:"实测向：'让 ChatGPT 接管你的浏览器一天'，一边演示一边谈隐私取舍。",
     tags:["ChatGPT","隐私"]
-  },
-  {
-    grade:"A", score:80, title:"OpenAI 给 GPT-6.1 Sol 扩容记忆，GPT-6 全系提速 50%",
-    source:"AIBase · 新智元", lang:"cn",
-    sum:"OpenAI 为 GPT-6.1 Sol 扩容记忆能力，同时 GPT-6 全系传出提速 50% 的升级计划，未来 28 天 ChatGPT 将迎来重大升级。",
-    why:"GPT 系列每次迭代都是全行业关注焦点，'提速 50%'与'记忆扩容'直接关系使用体验，开发者与普通用户都关心。",
-    angle:"产品向：'GPT-6 接下来 28 天要憋什么大招'，结合路线图做前瞻。",
-    tags:["OpenAI","大模型"]
-  },
-  {
-    grade:"B", score:76, title:"OpenAI 推 textGrain 文本水印：ChatGPT 代写要'实名'了",
-    source:"新智元", lang:"cn",
-    sum:"OpenAI 推出新型文本水印技术 textGrain，为 ChatGPT 生成内容逐词嵌入隐蔽密钥，肉眼不可辨、语义无损，但专用检测器可精准识别来源。",
-    why:"'AI 代写要实名'与大众日常高度相关，学术圈、职场人都关心，自带讨论度与争议。",
-    angle:"从'以后 AI 写的东西能查出来了'切入，聊水印技术与内容治理的博弈。",
-    tags:["OpenAI","内容治理"]
-  },
-  {
-    grade:"B", score:74, title:"可灵 AI 携 Kling4.0 杀向好莱坞，最长 30 秒视频生成",
-    source:"AIBase", lang:"cn",
-    sum:"快手可灵 AI 推出 Kling4.0，在视频真实感、镜头运动、口型同步和音频表现上升级，单次最长可生成 30 秒视频并支持续拍，向好莱坞内容市场发起冲击。",
-    why:"中国 AI 视频工具出海好莱坞，'国产 AI 打国际大厂'的故事性强，创作者群体高关注。",
-    angle:"出海向：'可灵能撼动好莱坞吗'，对比国际视频生成模型的格局。",
-    tags:["视频生成","出海"]
   }
 ];
 
