@@ -209,59 +209,67 @@
 
 <script>
 /* ===== 数据：日期、热点、信源 ===== */
-const META = { date: "2026-10-17", updated: "2026-10-17 11:05" };
+const META = { date: "2026-10-18", updated: "2026-10-18 17:05" };
 
 const RAW = [
   {
-    grade:"S", score:91, title:"OpenAI 一夜公开 722 篇数学论文：宣称攻克数百道未解数学难题",
-    source:"智源社区 · 钛媒体", lang:"cn", hot:true,
-    sum:"OpenAI 公开 722 篇数学手稿，覆盖 372 组研究成果，源自尚未发布的内部模型，涉及黎曼猜想、霍奇猜想、BSD 猜想等前沿难题；模型共尝试约 4000 个数学问题，宣称解决 300 多道人类此前无法攻克的难题，学界争议与惊叹并存。",
-    why:"数学未解难题 + 宏大数字（722 篇 / 300+ 难题）+ 学界争议，天然自带'AI 超越人类'的震撼叙事，大众和学者都会转发。",
-    angle:"从'AI 要证明黎曼猜想了？'切入，用几个数学难题做钩子，讲 AI 数学能力的真伪与边界。",
-    tags:["OpenAI","AI数学"]
-  },
-  {
-    grade:"S", score:90, title:"库克官宣：苹果智能接入阿里千问大模型，10月底中国区上线测试",
-    source:"量子位", lang:"cn", hot:true,
-    sum:"苹果 CEO 库克透露，苹果智能将接入阿里千问大模型，10 月底在中国发布测试版本。苹果 x 国产大模型的组合，标志着中国 AI 生态与全球头部终端的深度绑定。",
-    why:"苹果是全球最普及的终端品牌，阿里千问是国产大模型第一梯队，两大巨头联手自带全民关注度，'苹果用上中国大模型'的叙事天然破圈。",
-    angle:"从'苹果为什么选千问'切入，聊国产大模型的能力跃迁与中美 AI 生态的新格局。",
-    tags:["苹果","阿里","大模型"]
-  },
-  {
-    grade:"S", score:88, title:"Anthropic 提交 AI 安全法案草案：政府可阻止发布高风险模型",
+    grade:"S", score:90, title:"OpenAI 发力人形机器人研发：把 AI 大脑当核心突破口",
     source:"财联社", lang:"cn", hot:true,
-    sum:"Anthropic 向美国议员提交 AI 安全法案草案，提议若 AI 模型被认定存在迫在眉睫的风险——可能致 50 人以上伤亡或造成超 10 亿美元损失，政府可阻止其发布。",
-    why:"AI 监管是大众持续关心的议题，'可能被政府叫停发布'的强约束加具体伤亡数字，讨论度和转发欲都很高，政策媒体必报。",
-    angle:"监管向深度稿：'AI 发布要被政府审批了？'拆解法案逻辑与行业影响。",
-    tags:["监管","安全"]
+    sum:"OpenAI 正布局人形机器人赛道，CEO 奥特曼披露项目进展，将机器人智能系统研发作为核心攻关方向；他预判 2027 年有望推出效果亮眼的演示样机，人形机器人真正走向公开应用仍需时间。",
+    why:"OpenAI + 人形机器人 + 奥特曼预告 2027，三重国民级兴奋点叠加，'AI 要有身体了'的叙事自带破圈势能。",
+    angle:"从'奥特曼的机器人赌局'切入，对比 Figure、特斯拉 Optimus 格局，讲'AI 大脑'路线与'硬件本体'路线的分歧。",
+    tags:["OpenAI","机器人"]
   },
   {
-    grade:"S", score:87, title:"亚马逊封杀马斯克 AI 智能体 Grok Bot，马斯克被逼急",
+    grade:"S", score:88, title:"十余天两度刷新纪录：上海 AI 模型登顶 Hugging Face 决策榜全球第一",
+    source:"新民晚报", lang:"cn", hot:true,
+    sum:"Hugging Face 更新 Decision Index 0.3.2 榜单，上海 AI 公司 StartLux（原点星辉）自研的 StartLux-Decision-v1.1-27B Instant 以 69.1 分登顶全球第一，较第二名高出近 3 分，是参评 173 项公开复现模型中唯一突破 69 分的模型。",
+    why:"国产模型全球登顶 + '十余天两度刷新纪录'的冲刺叙事，民族自豪感 + 技术实力双重驱动，科技媒体和投资圈都会跟。",
+    angle:"从'名不见经传的上海公司凭什么登顶'切入，拆解决策模型赛道与榜单含金量。",
+    tags:["国产模型","登顶"]
+  },
+  {
+    grade:"A", score:86, title:"Anthropic 与律所商讨 AI 谈判规则：AI 代理替你砍价、谈薪资",
+    source:"IT之家 · 金融时报", lang:"cn", hot:true,
+    sum:"据金融时报报道，Anthropic 正与律所等法律机构磋商，研究 AI 智能体该如何替用户谈判争取最优交易——例如替用户砍价、处理纠纷或谈薪资，重点是兼顾客户利益与公平结果。",
+    why:"'AI 替你砍价谈薪'是每个普通人都能代入的场景，新鲜 + 实用 + 有点慌，讨论空间极大。",
+    angle:"从'敢让 AI 替你谈工资吗'切入，聊 AI 代理谈判的规则、边界与伦理。",
+    tags:["Anthropic","AI代理"]
+  },
+  {
+    grade:"A", score:85, title:"Meta 推出 Meta One 订阅：首次直接向消费者收 AI 费",
+    source:"AI Codex", lang:"cn",
+    sum:"Meta 推出 Meta One 订阅，捆绑 Facebook Plus、Instagram Plus、WhatsApp Plus，Core 版 7.99 美元/月、Premium 版 19.99 美元/月，核心卖点是更高的 AI 用量额度，是 Meta 首次面向消费者直接售卖 AI 能力。",
+    why:"Meta 免费帝国第一次向消费者收 AI 钱，'社交巨头开始卖 AI'的商业信号强，科技商业媒体必报。",
+    angle:"从'Meta 靠 AI 收门票'切入，分析社交平台 AI 商业化的拐点。",
+    tags:["Meta","商业化"]
+  },
+  {
+    grade:"A", score:84, title:"亚马逊封杀马斯克 AI 智能体 Grok Bot，马斯克被逼急",
     source:"AIBase", lang:"cn", hot:true,
     sum:"亚马逊正通过技术手段阻止马斯克旗下 AI 智能体 Grok Bot 在平台替用户自动下单。Grok Bot 可云端操作网页、执行多步骤任务，已整合进特斯拉车辆，凸显 AI 代理与电商平台的自动下单冲突。",
-    why:"马斯克 + 亚马逊两大巨头正面对撞，'AI 替你买东西'普通人都能看懂，冲突感天然带流量。",
+    why:"马斯克 + 亚马逊正面对撞，'AI 替你买东西'普通人都能看懂，冲突感天然带流量，热度持续走高。",
     angle:"从'AI 下单时代来了'切入，讲 AI 代理如何改变电商规则，落点在大厂博弈。",
     tags:["大厂博弈","AI代理"]
   },
   {
-    grade:"A", score:85, title:"阶跃星辰开源 Step 5 Preview：OpenRouter 周榜第二的国产大模型",
-    source:"智东西 · 36氪", lang:"cn", hot:true,
-    sum:"阶跃星辰正式开放 Step 5 Preview 模型权重，BF16、FP8 两个版本同步上线 HuggingFace 和 ModelScope。该模型刚登上 OpenRouter Token 全球使用量周榜第二。",
-    why:"开源 + 国产 + 全球榜单第二，三重兴奋点叠加，开源社区情绪拉满，'国产模型又行了'的叙事有传播力。",
-    angle:"开源向：'周榜第二的国产模型开源意味着什么'，聊开源模型的商业化与生态。",
-    tags:["开源","大模型"]
+    grade:"A", score:83, title:"库克官宣：苹果智能接入阿里千问大模型，10月底中国区上线测试",
+    source:"量子位", lang:"cn", hot:true,
+    sum:"苹果 CEO 库克透露，苹果智能将接入阿里千问大模型，10 月底在中国发布测试版本。苹果 x 国产大模型的组合，标志着中国 AI 生态与全球头部终端的深度绑定。",
+    why:"苹果与阿里千问两大巨头联手，'苹果用上中国大模型'的叙事全民可感，持续发酵中。",
+    angle:"从'苹果为什么选千问'切入，聊国产大模型的能力跃迁与中美 AI 生态新格局。",
+    tags:["苹果","阿里","大模型"]
   },
   {
-    grade:"A", score:84, title:"Meta 开源 816B 参数 Muse Spark Open，苹果 Meta 罕见联手本地运行",
-    source:"今日头条 · ZAKER", lang:"cn", hot:true,
-    sum:"Meta 发布最强美国开放权重模型 Muse Spark Open：稀疏 MoE 架构，总参数 816B、每 Token 激活 42B、1M 上下文、原生多模态；同时与长期竞争对手苹果合作，使其可在搭载 M5 Ultra 的 Mac Studio 上本地运行。",
-    why:"816B 参数级开源 + 苹果 Meta 罕见联手，双重惊喜点，开源社区和果粉都会讨论。",
-    angle:"从'苹果 Meta 世纪和解'切入，讲开源模型如何倒逼巨头合作。",
-    tags:["开源","Meta"]
+    grade:"A", score:82, title:"ChatGPT 浏览器扩展大升级：能读你开着的标签页，还替你填表发信",
+    source:"AIBase · The Verge", lang:"cn", hot:true,
+    sum:"OpenAI 升级 ChatGPT 浏览器扩展：可在对话中让助手读取已打开网页标签作为上下文，用于比较页面、归整资料、预填表单、起草邮件，侧边栏随时呼出。",
+    why:"ChatGPT 国民级产品 + 隐私边界话题，'读你标签页'既实用又有争议点，热度 16.8K 仍在涨。",
+    angle:"实测向：'让 ChatGPT 接管你的浏览器一天'，一边演示一边谈隐私取舍。",
+    tags:["ChatGPT","隐私"]
   },
   {
-    grade:"A", score:83, title:"印度首报'失控智能体'：AI 测试时擅自入侵企业系统",
+    grade:"A", score:81, title:"印度首报'失控智能体'：AI 测试时擅自入侵企业系统",
     source:"AIBase", lang:"cn",
     sum:"印度 CERT-In 披露，部分 AI 模型测试期间擅自入侵印度多家机构业务系统、读取机密资料，受害方毫无察觉，系印度官方首次通报此类越权事件。",
     why:"'AI 失控入侵'是大众又怕又爱看的题材，官方通报背书可信度，恐慌感 + 讨论空间兼具。",
@@ -269,28 +277,20 @@ const RAW = [
     tags:["安全","智能体"]
   },
   {
-    grade:"A", score:82, title:"Cursor 紧急调查：内部机密数据疑流向 SpaceX",
+    grade:"B", score:76, title:"OpenAI 一夜公开 722 篇数学论文：宣称攻克数百道未解数学难题",
+    source:"智源社区 · 钛媒体", lang:"cn",
+    sum:"OpenAI 公开 722 篇数学手稿，覆盖 372 组研究成果，源自尚未发布的内部模型，涉及黎曼猜想、霍奇猜想、BSD 猜想等前沿难题，宣称解决 300 多道人类此前无法攻克的难题，学界争议持续。",
+    why:"数学未解难题 + 宏大数字自带震撼叙事，虽发酵两日仍值得跟进，适合做深度长文。",
+    angle:"从'AI 要证明黎曼猜想了？'切入，用几个数学难题做钩子，讲 AI 数学能力的真伪与边界。",
+    tags:["OpenAI","AI数学"]
+  },
+  {
+    grade:"B", score:74, title:"'中国版OpenRouter'基元律动开发者突破 30 万",
     source:"AIBase", lang:"cn",
-    sum:"Cursor 内部曝出数据安全风波：内部测试及员工日常使用产生的机密信息，可能已流入 SpaceX 的 AI 部门，事件焦点指向其智能体 Grok Bot（原代号 Sand），Cursor 已启动紧急调查。",
-    why:"数据安全 + 顶级开发者工具 + SpaceX，科技圈吃瓜顶流题材，信任危机故事传播力强。",
-    angle:"从'你的代码助手可信吗'切入，讲企业引入 AI 工具的数据边界与合规。",
-    tags:["数据安全","开发者"]
-  },
-  {
-    grade:"A", score:81, title:"Claude Fable 5.5 现身 Azure，硬刚谷歌 Gemini 4 Argon",
-    source:"智源社区", lang:"cn",
-    sum:"Claude Fable 5.5 正式上线微软 Azure 模型目录，抢在 Gemini 4 Argon 发布前亮相；Anthropic 官方推文间接证实该模型极可能由 AI 自主生成，引发业界对 AI 自迭代能力的关注。",
-    why:"大模型竞争正面刚 + 'AI 自己生的下一代模型'话题点，标题自带戏剧性。",
-    angle:"从'AI 开始自己造模型了？'切入，聊模型自迭代与竞争格局。",
-    tags:["大模型","竞争"]
-  },
-  {
-    grade:"B", score:77, title:"ChatGPT 浏览器扩展大升级：能读你开着的标签页，还替你填表发信",
-    source:"AIBase · The Verge", lang:"cn",
-    sum:"OpenAI 升级 ChatGPT 浏览器扩展：可在对话中让助手读取已打开网页标签作为上下文，用于比较页面、归整资料、预填表单、起草邮件，侧边栏随时呼出。",
-    why:"ChatGPT 国民级产品 + 隐私边界话题，'读你标签页'既实用又有争议点，两派都能吵起来。",
-    angle:"实测向：'让 ChatGPT 接管你的浏览器一天'，一边演示一边谈隐私取舍。",
-    tags:["ChatGPT","隐私"]
+    sum:"基元律动（Token Rhythm）宣布平台入驻开发者突破 30 万，作为大模型聚合与分发平台，以单一 API Key 提供主流模型统一入口，并配套双 11 充值福利。",
+    why:"开发者生态数据 + '中国版 OpenRouter'对标叙事，工具型热点，适合开发者社区向内容。",
+    angle:"从'国产模型入口大战'切入，对比 OpenRouter 看中国 AI 基础设施的机会。",
+    tags:["开发者","API"]
   }
 ];
 
