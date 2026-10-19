@@ -214,7 +214,7 @@
 
 <script>
 /* ===== 数据：日期、热点、信源 ===== */
-const META = { date: "2026-10-19", updated: "2026-10-19 19:01" };
+const META = { date: "2026-10-19", updated: "2026-10-19 21:22", note: "今日无新增值得写热点" };
 
 const RAW = [
   {added: "10-19 19:01", grade: "A", score: 79, title: "游戏公司误退 3.3 万遭拒还，家长持 AI 伪造录音闹庭被训诫", source: "AIBase · 央视", lang: "cn", hot: true, sum: "央视报道西安雁塔区法院审结的一起不当得利纠纷：未成年人小涵在游戏平台充值约 5 万元，经调解按 30% 退还后，工作人员失误多退 33627.6 元遭家长拒绝返还；更严重的是，家长在法庭上出示 AI 伪造的录音证据，被法院当庭训诫。", why: "央视背书 + '多退 3 万拒还'的离奇剧情 + 'AI 伪造证据上法庭'的惊悚细节，法律与 AI 碰撞自带爆款体质。", angle: "从'AI 造假已经敢上法庭了'切入，讲 AI 证据的真实性风险与司法应对，警示普通人法律红线。", tags: ["AI安全", "司法", "伪造证据"]},
@@ -347,7 +347,7 @@ function init(){
   $("sCount").textContent = RAW.filter(d => d.grade === "S").length;
   $("hCount").textContent = RAW.length;
   $("updateTime").textContent = META.date;
-  $("updLabel").textContent = "更新于 " + META.updated + " · 共 " + RAW.length + " 条热点";
+  $("updLabel").textContent = "更新于 " + META.updated + " · 共 " + RAW.length + " 条热点" + (META.note ? " · " + META.note : "");
   renderSources();
   renderList();
 }
