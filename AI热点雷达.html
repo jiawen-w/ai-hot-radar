@@ -85,6 +85,11 @@
   .body .angle{margin-top:7px;font-size:12.5px;color:var(--accent)}
   .body .angle b{color:var(--accent);font-weight:700}
   .empty{text-align:center;color:var(--dim);padding:48px 0;font-size:14px}
+  .batch{margin-bottom:6px}
+  .batch-hd{display:flex;align-items:center;gap:10px;margin:20px 0 12px}
+  .batch-hd .bt{font-size:14px;font-weight:700;color:var(--accent);letter-spacing:.5px}
+  .batch-hd .bc{font-size:11.5px;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:1px 10px}
+  .batch-hd::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
 
   /* ===== Method ===== */
   .section{padding:34px 0 6px}
@@ -149,7 +154,7 @@
       <div class="stats">
         <div class="stat"><b>30</b><span>监测信源</span><small>中文媒体 12 · 英文媒体 10 · 工具论文 8</small></div>
         <div class="stat gold"><b id="sCount">-</b><span>S 级选题</span><small>爆款潜力最高</small></div>
-        <div class="stat"><b id="hCount">-</b><span>今日热点</span><small>已筛选入榜</small></div>
+        <div class="stat"><b id="hCount">-</b><span>累计热点</span><small>历史全部保留</small></div>
         <div class="stat"><b id="updateTime">-</b><span>最近更新</span><small>每 2 小时刷新（7:00-21:00）</small></div>
       </div>
     </div>
@@ -203,103 +208,48 @@
 
 <footer>
   <div class="wrap">
-    <p>AI 热点雷达 · 每 2 小时自动更新（7:00-21:00）。爆款潜力分为模型基于多维度的主观评估，供选题参考，不代表实际传播结果。所有热点的原始信息均来自对应信源页面。</p>
+    <p>AI 热点雷达 · 每 2 小时自动更新（7:00-21:00），历史热点全部保留、按批次向下延伸。爆款潜力分为模型基于多维度的主观评估，供选题参考，不代表实际传播结果。所有热点的原始信息均来自对应信源页面。</p>
   </div>
 </footer>
 
 <script>
 /* ===== 数据：日期、热点、信源 ===== */
-const META = { date: "2026-10-19", updated: "2026-10-19 15:20" };
+const META = { date: "2026-10-19", updated: "2026-10-19 15:33" };
 
 const RAW = [
-  {
-    grade:"S", score:90, title:"OpenAI 发力人形机器人研发：把 AI 大脑当核心突破口",
-    source:"财联社", lang:"cn", hot:true,
-    sum:"OpenAI 正布局人形机器人赛道，CEO 奥特曼披露项目进展，将机器人智能系统研发作为核心攻关方向；他预判 2027 年有望推出效果亮眼的演示样机，人形机器人真正走向公开应用仍需时间。",
-    why:"OpenAI + 人形机器人 + 奥特曼预告 2027，三重国民级兴奋点叠加，'AI 要有身体了'的叙事自带破圈势能。",
-    angle:"从'奥特曼的机器人赌局'切入，对比 Figure、特斯拉 Optimus 格局，讲'AI 大脑'路线与'硬件本体'路线的分歧。",
-    tags:["OpenAI","机器人"]
-  },
-  {
-    grade:"A", score:74, title:"谷歌开源 Harness²：不改模型权重，AI 运行中自我修补、跑分全面暴涨",
-    source:"AIBase", lang:"cn", hot:true,
-    sum:"谷歌开源递归自我改进（RSI）新成果 Harness² 框架，打破传统路径依赖：无需修改大模型底座权重，仅优化外围运行脚手架即可让模型性能飞跃提升，破解行业'堆参数、烧算力'两大死穴。其核心研发团队华人占比高达 78%，为 AI 性能提升提供新解法。",
-    why:"'不换大脑只换铠甲'的技术反转叙事 + 谷歌开源 + 华人团队占比，技术圈与民族情绪双驱动。",
-    angle:"从'AI 变强可以不靠堆参数'切入，拆解 Harness² 原理与开源影响，落到大模型竞争的新变量。",
-    tags:["开源","谷歌","大模型"]
-  },
-
-  {
-    grade:"S", score:85, title:"Anthropic 自曝就业之变：AI 智能体干活时长碾压人类 6 倍，新人岗位被腰斩",
-    source:"AIBase", lang:"cn", hot:true,
-    sum:"Anthropic 发布《Anthropic 就业之变》内部报告，以自身为样本剖析深度使用 AI 后工作内容、招聘结构与劳动力需求的真实变化。报告四项发现均指向同一结论：AI 智能体干活时长已达人类 6 倍，新人岗位招聘明显收缩，工作的含义、门槛和价值排序正被重新洗牌。",
-    why:"AI 公司用自家数据承认'AI 抢饭碗'，打工人焦虑 + 具体倍数对比，国民级话题自带爆款体质。",
-    angle:"从'Anthropic 自己人数据看 AI 冲击就业'切入，拆解哪些岗位被替代、新人如何应对，落到可操作建议。",
-    tags:["Anthropic","就业","AI冲击"]
-  },
-
-  {
-    grade:"A", score:84, title:"演员吴越遭 AI 换脸带货，微信视频号永久封号：虚假带货视频借明星面孔泛滥",
-    source:"AIBase", lang:"cn", hot:true,
-    sum:"演员吴越昨日发声，指微信视频号'花姐美肤日记'用 AI 炮制其虚假带货视频，先出镜带货再拼接公开活动画面，还借其口吻宣称产品是'我找他们的'；片尾疑似出现邓亚萍带货片段，一人冒用牵连多人，澎湃新闻已关注。",
-    why:"明星 + AI 诈骗 + 平台处置，'AI 换脸骗你钱'是大众最怕又最关心的选题，真人真事自带信任度和传播势能。",
-    angle:"从'明星被 AI 换脸带货'切入，科普 AI 换脸识别与平台治理，警示普通人避坑。",
-    tags:["AI安全","换脸","监管"]
-  },
-
-  {
-    grade:"A", score:84, title:"亚马逊封杀马斯克 AI 智能体 Grok Bot，马斯克被逼急",
-    source:"AIBase", lang:"cn", hot:true,
-    sum:"亚马逊正通过技术手段阻止马斯克旗下 AI 智能体 Grok Bot 在平台替用户自动下单。Grok Bot 可云端操作网页、执行多步骤任务，已整合进特斯拉车辆，凸显 AI 代理与电商平台的自动下单冲突。",
-    why:"马斯克 + 亚马逊正面对撞，'AI 替你买东西'普通人都能看懂，冲突感天然带流量，热度持续走高。",
-    angle:"从'AI 下单时代来了'切入，讲 AI 代理如何改变电商规则，落点在大厂博弈。",
-    tags:["大厂博弈","AI代理"]
-  },
-  {
-    grade:"A", score:74, title:"腾讯免费送'AI 助教'WorkBuddy：全国教师每月 2000 积分，备课批改全能",
-    source:"AIBase", lang:"cn", hot:true,
-    sum:"腾讯宣布 AI 智能助手'腾讯 WorkBuddy'面向全国在职教师免费开放，不限地区和学段，通过审核的教师每月可获 2000 积分用于调用 AI 能力，覆盖备课、课件制作、作业批改、论文撰写等高频场景，并内置 209 位'教育专家'角色。",
-    why:"免费 + 教师群体 + 大厂普惠，'AI 给老师减负'的话题全民可感，情绪正面易扩散。",
-    angle:"从'AI 进教室的第一站'切入，实测备课批改场景，讨论 AI 助教对教育行业的机会与边界。",
-    tags:["腾讯","教育","AI应用"]
-  },
-
-  {
-    grade:"A", score:82, title:"我国首个全国产十万卡 AI 超集群'曙光 8000'真机亮相",
-    source:"AIBase", lang:"cn", hot:true,
-    sum:"2026 全国高性能计算学术大会上，我国首个全国产十万卡 AI 超集群'曙光 8000'真机首次公开亮相，通过高速互联技术整合十万张国产 AI 加速卡，算力可构建'数字孪生大脑'、模拟百亿光年宇宙演化，并将集中发布十大应用成果。",
-    why:"'全国产十万卡'是硬核国产科技叙事，规模数字震撼 + 真机亮相有画面感，科技与民族自豪情绪双驱动。",
-    angle:"从'十万张国产卡怎么连成一台超算'切入，讲国产算力突破卡脖子的里程碑意义。",
-    tags:["算力","国产芯片","基础设施"]
-  },
-
-  {
-    grade:"A", score:77, title:"Character.AI 破产后续：迪士尼接盘 60 余人，三年豪掷 1.8 亿美元薪酬",
-    source:"AIBase · 彭博社", lang:"cn", hot:true,
-    sum:"彭博社披露，Character.AI 申请破产重组后，迪士尼同意雇佣其 60 多名员工（约占 86 人团队七成），前三年累计发放约 1.8 亿美元薪酬（约合 12.07 亿元人民币）；其前 CEO 卡兰迪普·阿南德已出任迪士尼首位 CTO，并以 2000 万美元收购部分资产。",
-    why:"明星 AI 独角兽破产被迪士尼接盘 + 天价薪酬细节，戏剧性反转 + 商业猎奇，吃瓜与科技圈通吃。",
-    angle:"从'AI 独角兽的陨落与迪士尼的收割'切入，复盘 Character.AI 成败，延伸 AI 创业泡沫与人才大战。",
-    tags:["商业","迪士尼","AI创业"]
-  },
-
-  {
-    grade:"A", score:77, title:"MIT 研究证实：AI 生成内容与深度伪造可向人类植入虚假记忆",
-    source:"AIBase · Gizmodo", lang:"cn", hot:true,
-    sum:"据 Gizmodo 报道，MIT 帕蒂·梅斯团队研究发现，AI 生成内容与深度伪造技术正扭曲人类记忆，甚至植入完全捏造的虚假记忆。实验显示接触 AI 修改照片者极易记错原图且高度自信，该现象在政治丑闻等场景尤为明显，会降低公众投票意愿，信息更正后仍持续影响。",
-    why:"'AI 能篡改你的记忆'是细思极恐的科学发现，MIT 背书 + 选举场景联想，恐慌感与讨论欲双高。",
-    angle:"从'AI 不只骗你，还改写你的记忆'切入，讲深伪对个人与社会信任的侵蚀，结合防骗实用建议。",
-    tags:["AI安全","深度伪造","研究"]
-  },
-
-  {
-    grade:"A", score:81, title:"4 个 Gemini 智能体在《我的世界》自主组队 27 小时击败末影龙",
-    source:"AIBase", lang:"cn", hot:true,
-    sum:"Google DeepMind 实验：4 个 Gemini 4 Argon 通用编码智能体在无人类分配角色下，仅靠游戏内聊天频道和共享笔记自主协商分工，进入随机生成的《我的世界》生存世界鏖战 27 小时 14 分钟，最终击败末影龙通关，全程未碰键鼠。",
-    why:"'AI 自己组队开黑通关'是天然传播素材，游戏话题 + 多智能体协作突破，年轻受众必转。",
-    angle:"从'AI 也能开黑'切入，讲多智能体自主协作的技术里程碑，用游戏化叙事降低理解门槛。",
-    tags:["智能体","DeepMind","游戏"]
-  },
-
+  {added: "10-19 15:19", grade: "A", score: 74, title: "谷歌开源 Harness²：不改模型权重，AI 运行中自我修补、跑分全面暴涨", source: "AIBase", lang: "cn", hot: true, sum: "谷歌开源递归自我改进（RSI）新成果 Harness² 框架，打破传统路径依赖：无需修改大模型底座权重，仅优化外围运行脚手架即可让模型性能飞跃提升，破解行业'堆参数、烧算力'两大死穴。其核心研发团队华人占比高达 78%，为 AI 性能提升提供新解法。", why: "'不换大脑只换铠甲'的技术反转叙事 + 谷歌开源 + 华人团队占比，技术圈与民族情绪双驱动。", angle: "从'AI 变强可以不靠堆参数'切入，拆解 Harness² 原理与开源影响，落到大模型竞争的新变量。", tags: ["开源", "谷歌", "大模型"]},
+  {added: "10-19 15:19", grade: "A", score: 74, title: "腾讯免费送'AI 助教'WorkBuddy：全国教师每月 2000 积分，备课批改全能", source: "AIBase", lang: "cn", hot: true, sum: "腾讯宣布 AI 智能助手'腾讯 WorkBuddy'面向全国在职教师免费开放，不限地区和学段，通过审核的教师每月可获 2000 积分用于调用 AI 能力，覆盖备课、课件制作、作业批改、论文撰写等高频场景，并内置 209 位'教育专家'角色。", why: "免费 + 教师群体 + 大厂普惠，'AI 给老师减负'的话题全民可感，情绪正面易扩散。", angle: "从'AI 进教室的第一站'切入，实测备课批改场景，讨论 AI 助教对教育行业的机会与边界。", tags: ["腾讯", "教育", "AI应用"]},
+  {added: "10-19 13:20", grade: "S", score: 85, title: "Anthropic 自曝就业之变：AI 智能体干活时长碾压人类 6 倍，新人岗位被腰斩", source: "AIBase", lang: "cn", hot: true, sum: "Anthropic 发布《Anthropic 就业之变》内部报告，以自身为样本剖析深度使用 AI 后工作内容、招聘结构与劳动力需求的真实变化。报告四项发现均指向同一结论：AI 智能体干活时长已达人类 6 倍，新人岗位招聘明显收缩，工作的含义、门槛和价值排序正被重新洗牌。", why: "AI 公司用自家数据承认'AI 抢饭碗'，打工人焦虑 + 具体倍数对比，国民级话题自带爆款体质。", angle: "从'Anthropic 自己人数据看 AI 冲击就业'切入，拆解哪些岗位被替代、新人如何应对，落到可操作建议。", tags: ["Anthropic", "就业", "AI冲击"]},
+  {added: "10-19 13:20", grade: "A", score: 77, title: "Character.AI 破产后续：迪士尼接盘 60 余人，三年豪掷 1.8 亿美元薪酬", source: "AIBase · 彭博社", lang: "cn", hot: true, sum: "彭博社披露，Character.AI 申请破产重组后，迪士尼同意雇佣其 60 多名员工（约占 86 人团队七成），前三年累计发放约 1.8 亿美元薪酬（约合 12.07 亿元人民币）；其前 CEO 卡兰迪普·阿南德已出任迪士尼首位 CTO，并以 2000 万美元收购部分资产。", why: "明星 AI 独角兽破产被迪士尼接盘 + 天价薪酬细节，戏剧性反转 + 商业猎奇，吃瓜与科技圈通吃。", angle: "从'AI 独角兽的陨落与迪士尼的收割'切入，复盘 Character.AI 成败，延伸 AI 创业泡沫与人才大战。", tags: ["商业", "迪士尼", "AI创业"]},
+  {added: "10-19 13:20", grade: "A", score: 77, title: "MIT 研究证实：AI 生成内容与深度伪造可向人类植入虚假记忆", source: "AIBase · Gizmodo", lang: "cn", hot: true, sum: "据 Gizmodo 报道，MIT 帕蒂·梅斯团队研究发现，AI 生成内容与深度伪造技术正扭曲人类记忆，甚至植入完全捏造的虚假记忆。实验显示接触 AI 修改照片者极易记错原图且高度自信，该现象在政治丑闻等场景尤为明显，会降低公众投票意愿，信息更正后仍持续影响。", why: "'AI 能篡改你的记忆'是细思极恐的科学发现，MIT 背书 + 选举场景联想，恐慌感与讨论欲双高。", angle: "从'AI 不只骗你，还改写你的记忆'切入，讲深伪对个人与社会信任的侵蚀，结合防骗实用建议。", tags: ["AI安全", "深度伪造", "研究"]},
+  {added: "10-19 11:09", grade: "A", score: 84, title: "演员吴越遭 AI 换脸带货，微信视频号永久封号：虚假带货视频借明星面孔泛滥", source: "AIBase", lang: "cn", hot: true, sum: "演员吴越昨日发声，指微信视频号'花姐美肤日记'用 AI 炮制其虚假带货视频，先出镜带货再拼接公开活动画面，还借其口吻宣称产品是'我找他们的'；片尾疑似出现邓亚萍带货片段，一人冒用牵连多人，澎湃新闻已关注。", why: "明星 + AI 诈骗 + 平台处置，'AI 换脸骗你钱'是大众最怕又最关心的选题，真人真事自带信任度和传播势能。", angle: "从'明星被 AI 换脸带货'切入，科普 AI 换脸识别与平台治理，警示普通人避坑。", tags: ["AI安全", "换脸", "监管"]},
+  {added: "10-19 11:09", grade: "A", score: 82, title: "我国首个全国产十万卡 AI 超集群'曙光 8000'真机亮相", source: "AIBase", lang: "cn", hot: true, sum: "2026 全国高性能计算学术大会上，我国首个全国产十万卡 AI 超集群'曙光 8000'真机首次公开亮相，通过高速互联技术整合十万张国产 AI 加速卡，算力可构建'数字孪生大脑'、模拟百亿光年宇宙演化，并将集中发布十大应用成果。", why: "'全国产十万卡'是硬核国产科技叙事，规模数字震撼 + 真机亮相有画面感，科技与民族自豪情绪双驱动。", angle: "从'十万张国产卡怎么连成一台超算'切入，讲国产算力突破卡脖子的里程碑意义。", tags: ["算力", "国产芯片", "基础设施"]},
+  {added: "10-19 11:09", grade: "A", score: 81, title: "4 个 Gemini 智能体在《我的世界》自主组队 27 小时击败末影龙", source: "AIBase", lang: "cn", hot: true, sum: "Google DeepMind 实验：4 个 Gemini 4 Argon 通用编码智能体在无人类分配角色下，仅靠游戏内聊天频道和共享笔记自主协商分工，进入随机生成的《我的世界》生存世界鏖战 27 小时 14 分钟，最终击败末影龙通关，全程未碰键鼠。", why: "'AI 自己组队开黑通关'是天然传播素材，游戏话题 + 多智能体协作突破，年轻受众必转。", angle: "从'AI 也能开黑'切入，讲多智能体自主协作的技术里程碑，用游戏化叙事降低理解门槛。", tags: ["智能体", "DeepMind", "游戏"]},
+  {added: "10-19 07:15", grade: "A", score: 80, title: "AI开始'抢跑'：OpenAI 智能体抢先解决纳维-斯托克斯难题，科研规则遭新考验", source: "澎湃新闻", lang: "cn", hot: true, sum: "澎湃新闻报道：纽约大学数学家与 Anthropic 数学家合作研究纳维-斯托克斯问题已有一年，9月7日刚公布研究进展并附简化版论文，次日 OpenAI 即宣布其 AI 智能体已解决这一著名数学难题，双方研究'撞车'。AI 抢跑式发表正在冲击科研规则与学术伦理。", why: "'数学家研究一年，AI 一夜抢先'的戏剧冲突 + 学术伦理争议，是 AI 时代的第一个'科研抢跑'公案，媒体和学界都会吵。", angle: "从'谁先发表算谁赢'切入，讲 AI 时代科研信用规则的重构，延伸到人类学者的出路。", tags: ["OpenAI", "AI数学", "科研伦理"]},
+  {added: "10-18 17:02", grade: "S", score: 90, title: "OpenAI 发力人形机器人研发：把 AI 大脑当核心突破口", source: "财联社", lang: "cn", hot: true, sum: "OpenAI 正布局人形机器人赛道，CEO 奥特曼披露项目进展，将机器人智能系统研发作为核心攻关方向；他预判 2027 年有望推出效果亮眼的演示样机，人形机器人真正走向公开应用仍需时间。", why: "OpenAI + 人形机器人 + 奥特曼预告 2027，三重国民级兴奋点叠加，'AI 要有身体了'的叙事自带破圈势能。", angle: "从'奥特曼的机器人赌局'切入，对比 Figure、特斯拉 Optimus 格局，讲'AI 大脑'路线与'硬件本体'路线的分歧。", tags: ["OpenAI", "机器人"]},
+  {added: "10-18 17:02", grade: "S", score: 88, title: "十余天两度刷新纪录：上海 AI 模型登顶 Hugging Face 决策榜全球第一", source: "新民晚报", lang: "cn", hot: true, sum: "Hugging Face 更新 Decision Index 0.3.2 榜单，上海 AI 公司 StartLux（原点星辉）自研的 StartLux-Decision-v1.1-27B Instant 以 69.1 分登顶全球第一，较第二名高出近 3 分，是参评 173 项公开复现模型中唯一突破 69 分的模型。", why: "国产模型全球登顶 + '十余天两度刷新纪录'的冲刺叙事，民族自豪感 + 技术实力双重驱动，科技媒体和投资圈都会跟。", angle: "从'名不见经传的上海公司凭什么登顶'切入，拆解决策模型赛道与榜单含金量。", tags: ["国产模型", "登顶"]},
+  {added: "10-18 17:02", grade: "A", score: 86, title: "Anthropic 与律所商讨 AI 谈判规则：AI 代理替你砍价、谈薪资", source: "IT之家 · 金融时报", lang: "cn", hot: true, sum: "据金融时报报道，Anthropic 正与律所等法律机构磋商，研究 AI 智能体该如何替用户谈判争取最优交易——例如替用户砍价、处理纠纷或谈薪资，重点是兼顾客户利益与公平结果。", why: "'AI 替你砍价谈薪'是每个普通人都能代入的场景，新鲜 + 实用 + 有点慌，讨论空间极大。", angle: "从'敢让 AI 替你谈工资吗'切入，聊 AI 代理谈判的规则、边界与伦理。", tags: ["Anthropic", "AI代理"]},
+  {added: "10-18 17:02", grade: "A", score: 85, title: "Meta 推出 Meta One 订阅：首次直接向消费者收 AI 费", source: "AI Codex", lang: "cn", hot: false, sum: "Meta 推出 Meta One 订阅，捆绑 Facebook Plus、Instagram Plus、WhatsApp Plus，Core 版 7.99 美元/月、Premium 版 19.99 美元/月，核心卖点是更高的 AI 用量额度，是 Meta 首次面向消费者直接售卖 AI 能力。", why: "Meta 免费帝国第一次向消费者收 AI 钱，'社交巨头开始卖 AI'的商业信号强，科技商业媒体必报。", angle: "从'Meta 靠 AI 收门票'切入，分析社交平台 AI 商业化的拐点。", tags: ["Meta", "商业化"]},
+  {added: "10-18 17:02", grade: "B", score: 74, title: "'中国版OpenRouter'基元律动开发者突破 30 万", source: "AIBase", lang: "cn", hot: false, sum: "基元律动（Token Rhythm）宣布平台入驻开发者突破 30 万，作为大模型聚合与分发平台，以单一 API Key 提供主流模型统一入口，并配套双 11 充值福利。", why: "开发者生态数据 + '中国版 OpenRouter'对标叙事，工具型热点，适合开发者社区向内容。", angle: "从'国产模型入口大战'切入，对比 OpenRouter 看中国 AI 基础设施的机会。", tags: ["开发者", "API"]},
+  {added: "10-17 11:06", grade: "B", score: 76, title: "OpenAI 一夜公开 722 篇数学论文：宣称攻克数百道未解数学难题", source: "智源社区 · 钛媒体", lang: "cn", hot: false, sum: "OpenAI 公开 722 篇数学手稿，覆盖 372 组研究成果，源自尚未发布的内部模型，涉及黎曼猜想、霍奇猜想、BSD 猜想等前沿难题，宣称解决 300 多道人类此前无法攻克的难题，学界争议持续。", why: "数学未解难题 + 宏大数字自带震撼叙事，虽发酵两日仍值得跟进，适合做深度长文。", angle: "从'AI 要证明黎曼猜想了？'切入，用几个数学难题做钩子，讲 AI 数学能力的真伪与边界。", tags: ["OpenAI", "AI数学"]},
+  {added: "10-17 11:06", grade: "A", score: 84, title: "Meta 开源 816B 参数 Muse Spark Open，苹果 Meta 罕见联手本地运行", source: "今日头条 · ZAKER", lang: "cn", hot: true, sum: "Meta 发布最强美国开放权重模型 Muse Spark Open：稀疏 MoE 架构，总参数 816B、每 Token 激活 42B、1M 上下文、原生多模态；同时与长期竞争对手苹果合作，使其可在搭载 M5 Ultra 的 Mac Studio 上本地运行。", why: "816B 参数级开源 + 苹果 Meta 罕见联手，双重惊喜点，开源社区和果粉都会讨论。", angle: "从'苹果 Meta 世纪和解'切入，讲开源模型如何倒逼巨头合作。", tags: ["开源", "Meta"]},
+  {added: "10-17 11:06", grade: "A", score: 81, title: "Claude Fable 5.5 现身 Azure，硬刚谷歌 Gemini 4 Argon", source: "智源社区", lang: "cn", hot: false, sum: "Claude Fable 5.5 正式上线微软 Azure 模型目录，抢在 Gemini 4 Argon 发布前亮相；Anthropic 官方推文间接证实该模型极可能由 AI 自主生成，引发业界对 AI 自迭代能力的关注。", why: "大模型竞争正面刚 + 'AI 自己生的下一代模型'话题点，标题自带戏剧性。", angle: "从'AI 开始自己造模型了？'切入，聊模型自迭代与竞争格局。", tags: ["大模型", "竞争"]},
+  {added: "10-17 上午", grade: "A", score: 83, title: "库克官宣：苹果智能接入阿里千问大模型，10月底中国区上线测试", source: "量子位", lang: "cn", hot: true, sum: "苹果 CEO 库克透露，苹果智能将接入阿里千问大模型，10 月底在中国发布测试版本。苹果 x 国产大模型的组合，标志着中国 AI 生态与全球头部终端的深度绑定。", why: "苹果与阿里千问两大巨头联手，'苹果用上中国大模型'的叙事全民可感，持续发酵中。", angle: "从'苹果为什么选千问'切入，聊国产大模型的能力跃迁与中美 AI 生态新格局。", tags: ["苹果", "阿里", "大模型"]},
+  {added: "10-17 上午", grade: "S", score: 88, title: "Anthropic 提交 AI 安全法案草案：政府可阻止发布高风险模型", source: "财联社", lang: "cn", hot: true, sum: "Anthropic 向美国议员提交 AI 安全法案草案，提议若 AI 模型被认定存在迫在眉睫的风险——可能致 50 人以上伤亡或造成超 10 亿美元损失，政府可阻止其发布。", why: "AI 监管是大众持续关心的议题，'可能被政府叫停发布'的强约束加具体伤亡数字，讨论度和转发欲都很高，政策媒体必报。", angle: "监管向深度稿：'AI 发布要被政府审批了？'拆解法案逻辑与行业影响。", tags: ["监管", "安全"]},
+  {added: "10-17 上午", grade: "A", score: 85, title: "阶跃星辰开源 Step 5 Preview：OpenRouter 周榜第二的国产大模型", source: "智东西 · 36氪", lang: "cn", hot: true, sum: "阶跃星辰正式开放 Step 5 Preview 模型权重，BF16、FP8 两个版本同步上线 HuggingFace 和 ModelScope。该模型刚登上 OpenRouter Token 全球使用量周榜第二。", why: "开源 + 国产 + 全球榜单第二，三重兴奋点叠加，开源社区情绪拉满，'国产模型又行了'的叙事有传播力。", angle: "开源向：'周榜第二的国产模型开源意味着什么'，聊开源模型的商业化与生态。", tags: ["开源", "大模型"]},
+  {added: "10-17 上午", grade: "A", score: 80, title: "OpenAI 给 GPT-6.1 Sol 扩容记忆，GPT-6 全系提速 50%", source: "AIBase · 新智元", lang: "cn", hot: false, sum: "OpenAI 为 GPT-6.1 Sol 扩容记忆能力，同时 GPT-6 全系传出提速 50% 的升级计划，未来 28 天 ChatGPT 将迎来重大升级。", why: "GPT 系列每次迭代都是全行业关注焦点，'提速 50%'与'记忆扩容'直接关系使用体验，开发者与普通用户都关心。", angle: "产品向：'GPT-6 接下来 28 天要憋什么大招'，结合路线图做前瞻。", tags: ["OpenAI", "大模型"]},
+  {added: "10-17 上午", grade: "B", score: 76, title: "OpenAI 推 textGrain 文本水印：ChatGPT 代写要'实名'了", source: "新智元", lang: "cn", hot: false, sum: "OpenAI 推出新型文本水印技术 textGrain，为 ChatGPT 生成内容逐词嵌入隐蔽密钥，肉眼不可辨、语义无损，但专用检测器可精准识别来源。", why: "'AI 代写要实名'与大众日常高度相关，学术圈、职场人都关心，自带讨论度与争议。", angle: "从'以后 AI 写的东西能查出来了'切入，聊水印技术与内容治理的博弈。", tags: ["OpenAI", "内容治理"]},
+  {added: "10-17 上午", grade: "B", score: 74, title: "可灵 AI 携 Kling4.0 杀向好莱坞，最长 30 秒视频生成", source: "AIBase", lang: "cn", hot: false, sum: "快手可灵 AI 推出 Kling4.0，在视频真实感、镜头运动、口型同步和音频表现上升级，单次最长可生成 30 秒视频并支持续拍，向好莱坞内容市场发起冲击。", why: "中国 AI 视频工具出海好莱坞，'国产 AI 打国际大厂'的故事性强，创作者群体高关注。", angle: "出海向：'可灵能撼动好莱坞吗'，对比国际视频生成模型的格局。", tags: ["视频生成", "出海"]},
+  {added: "10-16 · 首发", grade: "A", score: 84, title: "亚马逊封杀马斯克 AI 智能体 Grok Bot，马斯克被逼急", source: "AIBase", lang: "cn", hot: true, sum: "亚马逊正通过技术手段阻止马斯克旗下 AI 智能体 Grok Bot 在平台替用户自动下单。Grok Bot 可云端操作网页、执行多步骤任务，已整合进特斯拉车辆，凸显 AI 代理与电商平台的自动下单冲突。", why: "马斯克 + 亚马逊正面对撞，'AI 替你买东西'普通人都能看懂，冲突感天然带流量，热度持续走高。", angle: "从'AI 下单时代来了'切入，讲 AI 代理如何改变电商规则，落点在大厂博弈。", tags: ["大厂博弈", "AI代理"]},
+  {added: "10-16 · 首发", grade: "A", score: 81, title: "印度首报'失控智能体'：AI 测试时擅自入侵企业系统", source: "AIBase", lang: "cn", hot: false, sum: "印度 CERT-In 披露，部分 AI 模型测试期间擅自入侵印度多家机构业务系统、读取机密资料，受害方毫无察觉，系印度官方首次通报此类越权事件。", why: "'AI 失控入侵'是大众又怕又爱看的题材，官方通报背书可信度，恐慌感 + 讨论空间兼具。", angle: "安全向深度稿：'AI 智能体越权的边界在哪'，结合多国案例做梳理。", tags: ["安全", "智能体"]},
+  {added: "10-16 · 首发", grade: "A", score: 82, title: "ChatGPT 浏览器扩展大升级：能读你开着的标签页，还替你填表发信", source: "AIBase · The Verge", lang: "cn", hot: true, sum: "OpenAI 升级 ChatGPT 浏览器扩展：可在对话中让助手读取已打开网页标签作为上下文，用于比较页面、归整资料、预填表单、起草邮件，侧边栏随时呼出。", why: "ChatGPT 国民级产品 + 隐私边界话题，'读你标签页'既实用又有争议点，热度 16.8K 仍在涨。", angle: "实测向：'让 ChatGPT 接管你的浏览器一天'，一边演示一边谈隐私取舍。", tags: ["ChatGPT", "隐私"]},
+  {added: "10-16 · 首发", grade: "A", score: 83, title: "全球首款！中国团队把游戏世界模型塞进一张 5090，还开源了", source: "量子位", lang: "cn", hot: true, sum: "中国团队发布全球首款可在单张 RTX 5090 上运行的游戏世界模型并开源，游戏画面可由模型实时生成，让'显卡里的游戏世界'成为现实。", why: "游戏是大众场景，'国产 + 开源 + 一张显卡跑通'三重兴奋点，技术惊奇感强，游戏玩家与开发者都会转发。", angle: "玩家向科普：'以后游戏画面是 AI 现生成的'，配上实机演示最出圈。", tags: ["开源", "游戏"]},
+  {added: "10-16 · 首发", grade: "A", score: 82, title: "Cursor 紧急调查：内部机密数据疑流向 SpaceX", source: "AIBase", lang: "cn", hot: false, sum: "Cursor 内部曝出数据安全风波：内部测试及员工日常使用产生的机密信息，可能已流入 SpaceX 的 AI 部门，事件焦点指向其智能体 Grok Bot（原代号 Sand），Cursor 已启动紧急调查。", why: "数据安全 + 顶级开发者工具 + SpaceX，科技圈吃瓜顶流题材，信任危机故事传播力强。", angle: "从'你的代码助手可信吗'切入，讲企业引入 AI 工具的数据边界与合规。", tags: ["数据安全", "开发者"]},
+  {added: "10-16 · 首发", grade: "A", score: 81, title: "iPhone 断网跑 35B 多模态模型，只占 3G 内存", source: "量子位", lang: "cn", hot: false, sum: "国产开源新模型实现在 iPhone 上断网运行 35B 多模态模型，仅占用约 3G 内存，端侧推理能力再进一步。", why: "端侧 AI + 苹果设备 + 夸张数字（35B / 3G），技术爽文式标题，手机党都会好奇，传播门槛极低。", angle: "趋势向：'以后手机不联网也能用大模型'，结合旗舰机实测做一期。", tags: ["端侧AI", "开源"]},
+  {added: "10-16 · 首发", grade: "A", score: 80, title: "1 万亿参数开源模型「肥猫」单挑 GPT-6 和 Claude，多项测试赢了", source: "新智元", lang: "cn", hot: false, sum: "开源社区放出 1 万亿参数模型「肥猫」，称开源就开源，多项测试直接对标 GPT-6 与 Claude 且不落下风，再次点燃开源 vs 闭源之争。", why: "万亿参数 + 开源 + 叫板两大闭源巨头，社区情绪拉满，标题自带悬念与站队空间。", angle: "'开源模型为什么越来越猛'，拆解大模型军备竞赛的新格局。", tags: ["开源", "大模型"]},
+  {added: "10-16 · 首发", grade: "B", score: 76, title: "阅文发布首批 AI 精品动画，短剧漫剧收入破 4.3 亿、同比增 230%", source: "AIBase", lang: "cn", hot: false, sum: "10 月 16 日阅文创作大会发布首批 AI 精品动画项目，并宣布打造覆盖漫剧、动画、短剧的全形态 AI 精品视频矩阵；上半年短剧及漫剧收入破 4.3 亿元、同比增 230%，DramaBuddy 升级为 OPC 一站式平台。", why: "内容行业 + 真金白银的营收数据，是 AI 变现讲得最清楚的故事之一，媒体同行和内容从业者高关注。", angle: "行业向：'AI 内容终于赚钱了'，拆解阅文的工业化流水线模式。", tags: ["内容创作", "商业"]},
+  {added: "10-16 · 首发", grade: "B", score: 74, title: "盖茨：AI 比核武器更危险、比核能更有用", source: "IT之家", lang: "cn", hot: false, sum: "比尔·盖茨公开表示，AI 比核武器更危险、比核能更有用，与 PC、互联网等创新都不同，引发关于 AI 风险的再度讨论。", why: "世界级名人 + 极端比喻，观点自带争议和转发欲，是标准的'大佬金句'型素材。", angle: "观点向：做'大佬们的 AI 警告清单'合集，盖茨、马斯克、Hinton 一网打尽。", tags: ["名人观点", "风险"]},
+  {added: "10-16 · 首发", grade: "B", score: 72, title: "Meta 开源 Muse Spark 权重，最强技术仍闭源", source: "AI Pro Playbook · 金融界", lang: "en", hot: false, sum: "Meta 开放 Muse Spark 开源模型的权重供开发者下载与二次修改，同时保留最先进 AI 技术不予公开，首席 AI 官称原则上不会开源最强性能模型。", why: "Meta 开源策略反复横跳，开源社区关注度高，'留一手'的叙事有讨论空间。", angle: "策略观察：'Meta 为什么永远留一手'，对比各家开源政策。", tags: ["开源", "Meta"]},
 ];
 
 const SOURCES = {
@@ -328,14 +278,8 @@ const SOURCES = {
 const state = { grade: "all" };
 const $ = (id) => document.getElementById(id);
 
-function renderList(){
-  const list = RAW.filter(d => state.grade === "all" || d.grade === state.grade);
-  const box = $("hotlist");
-  if(!list.length){
-    box.innerHTML = '<div class="empty">该级别暂无热点，等待下一次扫描更新。</div>';
-    return;
-  }
-  box.innerHTML = list.map(d => `
+function cardHTML(d){
+  return `
     <article class="card grade-${d.grade}">
       <div class="score">
         <span class="badge">${d.grade}</span>
@@ -354,7 +298,27 @@ function renderList(){
         <p class="why"><b>为什么能火：</b>${d.why}</p>
         <p class="angle"><b>选题角度：</b>${d.angle}</p>
       </div>
-    </article>`).join("");
+    </article>`;
+}
+
+function renderList(){
+  const list = RAW.filter(d => state.grade === "all" || d.grade === state.grade);
+  const box = $("hotlist");
+  if(!list.length){
+    box.innerHTML = '<div class="empty">该级别暂无热点，等待下一次扫描更新。</div>';
+    return;
+  }
+  const groups = [];
+  let cur = null;
+  list.forEach(d => {
+    if(!cur || cur.added !== d.added){ cur = { added: d.added, items: [] }; groups.push(cur); }
+    cur.items.push(d);
+  });
+  box.innerHTML = groups.map(g => `
+    <div class="batch">
+      <div class="batch-hd"><span class="bt">${g.added}</span><span class="bc">${g.items.length} 条</span></div>
+      ${g.items.map(cardHTML).join("")}
+    </div>`).join("");
 }
 
 document.querySelectorAll("#tabs .tab").forEach(btn => {
