@@ -16,6 +16,7 @@ AI热点雷达 · 云端自动更新脚本（GitHub Actions 运行）
 """
 
 import re
+import sys
 import json
 import urllib.request
 from datetime import datetime, timedelta, timezone
@@ -72,7 +73,8 @@ ANGLE_MAP = {
 
 
 def log(msg):
-    print("[radar]", msg, flush=True)
+    # 日志走 stderr：stdout 只保留纯 JSON 摘要，供 workflow 的 json.load 直接解析
+    print("[radar]", msg, file=sys.stderr, flush=True)
 
 
 def fetch_feed():
