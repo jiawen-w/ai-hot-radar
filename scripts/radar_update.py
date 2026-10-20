@@ -313,16 +313,9 @@ def main():
         new_items = build_items(HTML_PATH)
 
         if not new_items:
-            with open(HTML_PATH, encoding="utf-8") as f:
-                s = f.read()
-            date_str = ts.split(" ")[0]
-            meta_new = f'const META = {{ date: "{date_str}", updated: "{ts}", note: "今日无新增值得写热点" }};'
-            s = re.sub(r"const META = \{[^}]*\};", meta_new, s, count=1)
-            with open(HTML_PATH, "w", encoding="utf-8") as f:
-                f.write(s)
-            ok, msg = self_check(s)
+            # 无新增：完全不动文件，避免刷时间戳导致 git 刷屏与 Pages 频繁重建
             print(json.dumps({"changed": False, "added_count": 0, "grades": [],
-                              "titles": [], "message": "今日无新增值得写热点", "check": msg, "ok": ok}))
+                              "titles": [], "message": "今日无新增值得写热点", "check": "SKIP", "ok": True}))
             return
 
         updated = update_html(HTML_PATH, new_items, ts)
