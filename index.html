@@ -214,9 +214,11 @@
 
 <script>
 /* ===== 数据：日期、热点、信源 ===== */
-const META = { date: "2026-10-20", updated: "2026-10-20 17:09" };
+const META = { date: "2026-10-20", updated: "2026-10-20 19:22" };
 
 const RAW = [
+  {added:"10-20 19:22",grade:"A",score:74,title:"DeepSeek 全面开源内部推理框架 DeepInfer，剑指大模型服务成本",source:"AIBase",lang:"cn",hot:true,sum:"10月20日，DeepSeek 宣布全面开源内部推理框架 DeepInfer，继开源多款大模型、TileLang 编译工具及推理算子库后再下一城。官方称模型能力上限由模型本身决定，但能否以合理成本支撑超大规模模型服务，关键在推理框架这一中间层；其调度庞大算力集群，效率直接决定算力成本与电力消耗。",why:"DeepSeek 开源动作自带国民级关注度，'推理成本是 AI 普惠关键'把技术话题拉到省钱叙事，三条同题条目同时刷屏印证多源热议。",angle:"从'DeepSeek 把看家推理框架也开源了'切入，拆解推理成本如何决定大模型服务价格，复盘 DeepSeek 全链路开源版图。",tags:["开源","DeepSeek","推理"]},
+  {added:"10-20 19:22",grade:"B",score:61,title:"微软让设计师也上手改代码：AI 渗入 Windows 11 开发流水线",source:"AIBase",lang:"cn",hot:false,sum:"微软将 AI 引入 Windows 11 开发流水线并改变设计师角色：Windows 产品设计副总裁巴卡在 X 上表示，AI 工具显著提升设计团队效率，部分设计师已借助 AI 直接参与代码修改，以优化系统精细度、一致性与体验，他称'这只是一切的起点'。",why:"'设计师开始写代码'是 AI 重塑职业分工的典型样本，微软官方口径背书，适合科技职场话题发酵。",angle:"从'AI 让设计师跨界写代码'切入，讲 AI 对软件研发流程与岗位边界的重塑，延伸到设计岗的新技能要求。",tags:["微软","AI应用","职场"]},
   {added:"10-20 17:09",grade:"A",score:74,title:"Gartner 泼冷水：7 万亿美元 AI 基建，到 2030 年最多回本一半",source:"AIBase",lang:"cn",hot:true,sum:"Gartner 预测 2026-2030 年全球 AI 基础设施投资总额将达 7 万亿美元（约 46.86 万亿元），但到 2030 年最多仅产出 3.6 万亿美元收入，连一半成本都收不回；计入融资等成本后回报压力更大。AI 基建投入与回报的缺口成为行业热议焦点。",why:"'7 万亿砸下去只回本一半'是自带冲击力的数字叙事，AI 泡沫论 vs 长期信仰派的激烈对撞天然制造传播张力，大众与投资人都在讨论。",angle:"从'AI 基建是不是下一个泡沫'切入，拆解 Gartner 预测口径与算力军备竞赛的经济账，平衡呈现乐观与谨慎两派观点。",tags:["AI基建","投资","泡沫论"]},
   {added:"10-20 17:09",grade:"A",score:74,title:"AI 红利怎么分？Anthropic 捐 5% 股份做公益，马斯克给每个孩子送 SpaceX 股票",source:"AIBase · 路透社",lang:"cn",hot:true,sum:"路透社报道，AI 浪潮催生巨额财富，Anthropic 与马斯克提出两套截然相反的分配方案：Anthropic 宣布拿出 5% 股份注入公益新基金，并以公共利益公司（PBC）架构推进 IPO，要求管理层兼顾公共福祉；马斯克则被曝给每个孩子送 SpaceX 股票。技术红利如何流向公众成为焦点。",why:"'AI 巨头怎么分钱'是普世好奇点，Anthropic 捐股 vs 马斯克送娃股票形成强烈对比叙事，财富分配话题极易引发站队与转发。",angle:"从'AI 造富之后钱归谁'切入，对比 Anthropic 与马斯克的分配哲学，延伸讨论 AI 财富再分配与公共利益机制。",tags:["Anthropic","商业","财富分配"]},
   {added:"10-20 17:09",grade:"A",score:73,title:"ChatGPT 上线 Slides：AI 一键生成演示文稿，还能拉人实时协作改 PPT",source:"AIBase",lang:"cn",hot:true,sum:"OpenAI 在 ChatGPT 推出 Slides 演示文稿功能，面向 Pro、Business 和 Enterprise 用户，补齐'办公三件套'最后一块拼图。用户可按对话、上传文件或大纲自动生成演示文稿，内置多种模板；生成后可邀请成员共同编辑、实时修改反馈，让 ChatGPT 依据团队意见自动调整。",why:"'ChatGPT 能做 PPT 了'精准命中打工人日常痛点，人人都用过 PPT，功能落地的反差感与效率叙事自带转发势能。",angle:"从'打工人可以把手上的 PPT 交给 AI 了'切入，实测 Slides 生成质量与协作流程，对比 Gamma 等既有 AI 幻灯工具。",tags:["OpenAI","办公","产品"]},
