@@ -4,9 +4,9 @@ name: AI热点雷达自动更新
 # 运行在 GitHub 云服务器上，电脑断网不影响；历史累积制与原页面规则完全保留。
 on:
   schedule:
-    # GitHub Actions 的 cron 为 UTC。北京时间 7:00–21:00 每 10 分钟
-    # = UTC 前日 23:00 至当日 13:00 每 10 分钟，故写为下方表达式。
-    - cron: '*/10 23,0-13 * * *'
+    # GitHub Actions 的 cron 为 UTC。北京时间 7:00–21:00 每 5 分钟
+    # = UTC 前日 23:00 至当日 13:00 每 5 分钟，故写为下方表达式。
+    - cron: '*/5 23,0-13 * * *'
   workflow_dispatch: {}
 
 permissions:
