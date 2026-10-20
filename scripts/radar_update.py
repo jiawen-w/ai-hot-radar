@@ -119,13 +119,15 @@ def parse_feed(data):
 
 
 def grams(title, n=4):
-    """4-gram 中文滑窗 + 英文词，用于同题判定"""
-    t = re.sub(r"[^\w\u4e00-\u9fff]+", "", title.lower())
+    """同题指纹：中文 4-gram（前缀 c）+ 英文整词（前缀 e）。
+    加前缀区分，避免英文品牌词（如 chatgpt/openai）的连续字符在无关标题间
+    产生假共享 4-gram 导致误判去重。"""
+    cn = re.sub(r"[^\u4e00-\u9fff]+", "", title)
     g = set()
-    for i in range(len(t) - n + 1):
-        g.add(t[i:i + n])
+    for i in range(len(cn) - n + 1):
+        g.add("c" + cn[i:i + n])
     for w in re.findall(r"[a-z0-9]{3,}", title.lower()):
-        g.add(w)
+        g.add("e" + w)
     return g
 
 
